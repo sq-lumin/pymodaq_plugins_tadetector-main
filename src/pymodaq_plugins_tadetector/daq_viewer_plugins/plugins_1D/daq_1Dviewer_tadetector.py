@@ -281,7 +281,7 @@ class DAQ_1DViewer_tadetector(DAQ_1DViewer_lightfield, DAQ_0DViewer_chopper, DAQ
     def compute_TA(self, I_ON, I_OFF, bg_dark = 0, bg_fluo = 0, stds = None):
         """Computes the TA signal from I_ON, I_OFF and their backgrounds. 
         if standard deviations are specified as a list : [sigbg_dark, sigbg_fluo], also computes sigTA"""
-        TA = -1e3*np.mean(np.log((I_ON-bg_fluo[:,None])/(I_OFF-bg_dark[:,None])), axis = 1)
+        TA = -1e3*np.mean(np.log10((I_ON-bg_fluo[:,None])/(I_OFF-bg_dark[:,None])), axis = 1)
         if stds is not None:
             sigBg_dark, sigBg_fluo = stds
             sigI_ON, sigI_OFF = np.std(I_ON, axis = 1)/np.sqrt(500),  np.std(I_OFF, axis = 1)/np.sqrt(1000) #500 and 1000 needs to be changed based on the numer of spectra taken
